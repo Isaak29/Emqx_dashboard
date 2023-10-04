@@ -33,12 +33,13 @@ def get_mqtt_clients():
         metrics_data = make_emqx_api_request('metrics?aggregate=true')
         stats_data = make_emqx_api_request('stats?aggregate=true')
         alarms_data = make_emqx_api_request('alarms?page=1&limit=50&activated=true')['data']
-
+        print(nodes_data)
         for item in clients_data:
             item['connected_at'] = format_timestamp(item['connected_at'])
             item['created_at'] = format_timestamp(item['created_at'])
-        return render_template('test.html', clients=clients_data, nodes=nodes_data, monitor_data=monitor_data,
+        return render_template('home.html', clients=clients_data, nodes=nodes_data, monitor_data=monitor_data,
                                metrics_data=metrics_data, stats=stats_data, alarms=alarms_data)
+        
     else:
         return "Unsupported method", 405
 
