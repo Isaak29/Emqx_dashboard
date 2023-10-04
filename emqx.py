@@ -37,9 +37,6 @@ def get_mqtt_clients():
         for item in clients_data:
             item['connected_at'] = format_timestamp(item['connected_at'])
             item['created_at'] = format_timestamp(item['created_at'])
-            item['activate_at'] = format_timestamp(item.get('activate_at')) if item.get('activate_at') is not None else None
-            item['deactivate_at'] = format_timestamp(item.get('deactivate_at')) if item.get('deactivate_at') is not None else None
-
         return render_template('test.html', clients=clients_data, nodes=nodes_data, monitor_data=monitor_data,
                                metrics_data=metrics_data, stats=stats_data, alarms=alarms_data)
     else:
