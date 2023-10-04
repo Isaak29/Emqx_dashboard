@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.4.0/justgage.min.js"></script>
@@ -49,45 +48,6 @@
                 <p></p>
             </div>
             
-            <!-- {% for entry in monitor_data %}
-            <div class="col-lg-2">
-               
-                <p >Connection</p>
-                
-                <p>{{ entry.connections }}</p>
-            
-            </div>
-            <div class="col-lg-2">
-            
-                <p>Live Connection</p>
-                <p>{{ entry.live_connections }}</p>
-         
-            </div>
-            <div class="col-lg-2">
-          
-                <p>Topics</p>
-                <p>{{ entry.topics }}</p>
-      
-            </div>
-            <div class="col-lg-2">
-       
-                <p>Sent</p>
-                <p>{{ entry.sent }}</p>
-              
-            </div>
-            <div class="col-lg-2">
-                
-                <p>Received/p>
-                <p>{{ entry.received }}</p>
-              
-            </div>
-            <div class="col-lg-2">
-               
-                <p>Subscriptions</p>
-                <p>{{ entry.subscriptions }}</p>
-               
-            </div>
-            {% endfor %} -->
         </div> 
     <div class="row"> 
         <div class="clienttable col-lg-6">
@@ -133,13 +93,15 @@
         <div id="subscribers" class="col-lg-2"></div>
     </div>
 
+    <!-- <button id="showAlarmBtn">Show Alarm</button> -->
+
     <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="alertModalTitle">Alert Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none;">
-                        <span aria-hidden="true" id="closeModalButton"><img src="..//static/images/cross.png" class="version_icon" ></span>
+                        <span aria-hidden="true" id="closeModalButton"><img src="..//static/images/cross.png" class="version_icon"></span>
                     </button>
                 </div>
                 <div class="modal-body" id="alertModalBody">
@@ -153,145 +115,9 @@
     </div>
     
 
-<!-- {% for alarm in alarm_data %}
-    <table>
-        <tr>
-            <td>Node</td>
-            <td>{{alarm.node}}</td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>{{alarm.name}}</td>
-        </tr>
-        <tr>
-            <td>Message</td>
-            <td>{{alarm.message}}</td>
-        </tr>
-        <tr>
-            <td>High watermark</td>
-            <td>{{alarm.details.high_watermark}}</td>
-        </tr>
-        <tr>
-            <td>Duration</td>
-            <td>{{alarm.duration}}</td>
-        </tr>
-        <tr>
-            <td>Activate at</td>
-            <td>{{alarm.activate_at}}</td>
-        </tr>
-        <tr>
-            <td>Deactivate at</td>
-            <td>{{alarm.deactivate_at}}</td>
-        </tr>
-    </table>
-  {% endfor %}   -->
-    <!-- <h2>EMQ X Nodes</h2> -->
-<!-- <table border="1">
-    <thead >
-        <tr>
-            <th>Node</th>
-            <th>Connections</th>
-            <th>Live Connections</th>
-            <th>Node Status</th>
-            <th>Version</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for node in nodes %}
-            <tr>
-                <td>{{ node.node }}</td>
-                <td>{{ node.connections }}</td>
-                <td>{{ node.live_connections }}</td>
-                <td>{{ node.node_status }}</td>
-                <td>{{ node.version }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table> -->
-<!-- <h1>Monitor</h1>
-<table border="1">
-    <tr>
-      <th>Connections</th>
-      <th>Dropped</th>
-      <th>Live Connections</th>
-      <th>Received</th>
-      <th>Sent</th>
-      <th>Subscriptions</th>
-      <th>Timestamp</th>
-      <th>Topics</th>
-    </tr>
-    {% for entry in monitor_data %}
-    <tr>
-      <td>{{ entry.connections }}</td>
-      <td>{{ entry.dropped }}</td>
-      <td>{{ entry.live_connections }}</td>
-      <td>{{ entry.received }}</td>
-      <td>{{ entry.sent }}</td>
-      <td>{{ entry.subscriptions }}</td>
-      <td>{{ entry.time_stamp }}</td>
-      <td>{{ entry.topics }}</td>
-    </tr>
-    {% endfor %}
-  </table> -->
-  <!-- <h1>Metrics</h1>
-  <table border="1">
-    <tr>
-      <th>Number of Connected Clients</th>
-      <th>Message Rate</th>
-      <th>Bytes Transmitted</th>
-      <th>Connection Duration</th>
-      <th>Topics Subscribed</th>
-      <th>QoS 1</th>
-      <th>QoS 2</th>
-      <th>QoS 3</th>
-      <th>Errors</th>
-      <th>Disconnection Session Information</th>
-      <th>Geolocation</th>
-      <th>Client ID</th>
-    </tr>
-    <tr>
-      <td>{{ metrics_data['client.connected'] }}</td>
-      <td>{{ metrics_data['messages.publish'] }}</td>
-      <td>{{ metrics_data['bytes.sent'] }}</td>
-      <td>{{ metrics_data['session.takenover'] }}</td>
-      <td>{{ metrics_data['packets.subscribe.received'] }}</td>
-      <td>{{ metrics_data['packets.subscribe.auth_error'] }}</td>
-      <td>{{ metrics_data['packets.subscribe.error'] }}</td>
-      <td>{{ metrics_data['packets.subscribe.auth_error'] }}</td>
-      <td>{{ metrics_data['packets.connack.auth_error'] }}</td>
-      <td>{{ metrics_data['session.discarded'] }}</td>
-      <td>{{ metrics_data['olp.hbn'] }}</td>
-      <td>{{ metrics_data['client.authenticate'] }}</td>
-    </tr>
-  </table> -->
-  <!-- <h1>Stats</h1>
-  <table border="1">
-    <tr>
-        <th>Channels count</th>
-        <th>Connection count</th>
-        <th>Delayed count</th>
-        <th>Live connection count</th>
-        <th>Retained count</th>
-        <th>Sessions count</th>
-        <th>Suboptions count</th> 
-        <th>Subscribers count</th>
-        <th>Subscriptions count</th>
-        <th>Topics count</th>
-    </tr>
-    <tr>
-        <td>{{stats['channels.count']}}</td>
-        <td>{{stats['connections.count']}}</td>
-        <td>{{stats['delayed.count']}}</td>
-        <td>{{stats['live_connections.count']}}</td>
-        <td>{{stats['retained.count']}}</td>
-        <td>{{stats['sessions.count']}}</td>
-        <td>{{stats['suboptions.count']}}</td>
-        <td>{{stats['subscribers.count']}}</td>
-        <td>{{stats['subscriptions.count']}}</td>
-        <td>{{stats['topics.count']}}</td>
-      
-    </tr>
-  </table> -->
+
+ 
+ 
   <script>
     // Metrics data
     const metricsData = {
@@ -441,7 +267,7 @@ updateMonitorData();
 </script>
 <script>
     function fetchAndShowAlarmData() {
-        console.log("start")
+        console.log("start");
         $.ajax({
             url: '/get_alarm_data',
             method: 'GET',
@@ -468,7 +294,7 @@ updateMonitorData();
             const firstAlarm = data[0];
 
             modalBody.innerHTML = `
-                            <table class="table">
+                <table class="table">
                     <tr>
                         <th>Node</th>
                         <td>${firstAlarm.node}</td>
@@ -498,7 +324,7 @@ updateMonitorData();
                         <td>${firstAlarm.deactivate_at}</td>
                     </tr>
                 </table>
-                `;
+            `;
 
             $('#alertModal').modal('show');
         }
@@ -507,23 +333,28 @@ updateMonitorData();
     function fetchAndShowAlarmDataPeriodically() {
         fetchAndShowAlarmData();
 
-        setInterval(fetchAndShowAlarmData, 60000); 
+        setInterval(fetchAndShowAlarmData, 60000);
     }
 
-    document.querySelector("#showAlarmBtn").addEventListener("click", function () {
-        fetchAndShowAlarmData();
-    });
+    // document.querySelector("#showAlarmBtn").addEventListener("click", function () {
+    //     fetchAndShowAlarmData();
+    // });
     fetchAndShowAlarmDataPeriodically();
 </script>
+
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
     document.querySelector("#closeModalButton").addEventListener("click", function () {
-        console.log("clicked")
+        console.log("clicked");
         $('#alertModal').modal('hide');
     });
+    
     document.querySelector("#closeModalButtons").addEventListener("click", function () {
-        console.log("clicked")
+        console.log("clicked");
         $('#alertModal').modal('hide');
     });
+
+});
 </script>
 
  
