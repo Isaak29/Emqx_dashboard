@@ -153,15 +153,15 @@
                     <div class="col-md-6 py-3">
                        <div class="row align-items-center d-flex">
                         <div class="col-md-2"><p class="circl channel-count"></p></div>
-                        <div class="col-md-10 text-white stats-text"><p>Channels Count</p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Channels Count <span class="fs-6 fw-bold">({{ stats['channels.count'] }})</span></p></div>
                        </div>
                        <div class="row align-items-center d-flex">
                         <div class="col-md-2"><p class="circl retain-count"></p></div>
-                        <div class="col-md-10 text-white stats-text"><p>Retained Count</p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Retained Count <span class="fs-6 fw-bold">({{ stats['retained.count'] }})</span></p></div>
                        </div>
                        <div class="row align-items-center d-flex">
                         <div class="col-md-2"><p class="circl session-count"></p></div>
-                        <div class="col-md-10 text-white stats-text"><p>Sessions Count</p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Sessions Count <span class="fs-6 fw-bold">( {{ stats['sessions.count'] }})</span></p></div>
                        </div>
                        <!-- <div class="row align-items-center d-flex">
                         <div class="col-md-2"><p class="circl"></p></div>
@@ -169,7 +169,9 @@
                        </div> -->
                        <div class="row align-items-center d-flex">
                         <div class="col-md-2"><p class="circl subscription-count"></p></div>
-                        <div class="col-md-10 text-white stats-text"><p>Subscriptions Count</p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Subscriptions Count
+                            <span class="fs-6 fw-bold">( {{ stats['subscriptions.count'] }})</span>
+                        </p></div>
                        </div>
                        <!-- <div class="row align-items-center d-flex">
                         <div class="col-md-2"><p class="circl"></p></div>
