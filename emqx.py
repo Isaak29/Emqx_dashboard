@@ -29,7 +29,7 @@ def get_mqtt_clients():
     if request.method == 'GET':
         clients_data = make_emqx_api_request('clients')['data']
         nodes_data = make_emqx_api_request('nodes')
-        monitor_data = make_emqx_api_request('monitor?latest=300')
+        monitor_data = make_emqx_api_request('monitor?latest=86400')
         metrics_data = make_emqx_api_request('metrics?aggregate=true')
         stats_data = make_emqx_api_request('stats?aggregate=true')
         alarms_data = make_emqx_api_request('alarms?page=1&limit=50&activated=true')['data']
