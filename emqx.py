@@ -33,7 +33,6 @@ def get_mqtt_clients():
         metrics_data = make_emqx_api_request('metrics?aggregate=true')
         stats_data = make_emqx_api_request('stats?aggregate=true')
         alarms_data = make_emqx_api_request('alarms?page=1&limit=50&activated=true')['data']
-        print(nodes_data)
         for item in clients_data:
             item['connected_at'] = format_timestamp(item['connected_at'])
             item['created_at'] = format_timestamp(item['created_at'])

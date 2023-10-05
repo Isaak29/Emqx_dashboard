@@ -76,7 +76,7 @@ body{
 }
 .box-con{
     height: 20vh;
-    width: 100%;
+    width: auto;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@ body{
     text-align: center;
 }
 .box-icon{
-    width: 60px;
+    width: 30px;
 }
 .table-con{
     background-color:#1C1F36;
@@ -99,6 +99,10 @@ body{
     margin: 7px 0px;
     height: 68vh;
     overflow-y: scroll;
+}
+table{
+    padding: 0;
+    margin: 0;
 }
 .table-con::-webkit-scrollbar{
     display: none;
@@ -125,4 +129,67 @@ tbody tr td{
     border: none;
     background-color: #1C1F36;
     text-align: center;
+    font-size: 13px;
+}
+.clin-id{
+    flex-wrap: wrap;
+}
+.mychart{
+    width: 350px;
+    height: 100%;
+    margin-left:200px;
+    /* position: relative; */
+   
+}
+.main-chart-con{
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+#myChart2{
+    width:50%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+}
+.second-dounght-con{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 33vh;
+}
+
+.cir{
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3/4;
+    min-height: 15px;
+    min-width: 15px;
+    max-height: 15px;
+    max-width: 15px;
+    background-color: #c71111;
+    border-radius: 100%;
+    border: 2px solid #fff;
+}
+.stats-text p{
+font-size: 16px;
+}
+.stats-text{
+    margin-bottom: -2px;
+}
+
+.channel-count{
+    background-color: #22C55E;
+}
+.retain-count{
+    background-color: #F7B31C;
+}
+.session-count{
+    background-color: #EF4444;
+}
+.subscription-count{
+    background-color: #87CEEB;
 }

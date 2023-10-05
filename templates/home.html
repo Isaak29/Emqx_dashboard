@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="../static/css/home.css">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <title>EMQ X MQTT Clients</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    
+    
+ 
+    
 </head>
 
 <body>
@@ -37,13 +45,13 @@
             </div>
             {% endfor %}
         </div>
-        <div class="row"  id="liveDataContainer">
+        <div class="row" id="liveDataContainer">
             <div class="col">
                 <div class="box-con">
                     <div class="first-box-titl" id="liveConnectionBox">
                         <h5>Live
                             Connection</h5>
-                            <h2></h2>
+                        <h2></h2>
                     </div>
                     <div class="box-icon">
                         <img src="../static/images/icon-1.png" alt="live connection" class="img-fluid">
@@ -54,7 +62,7 @@
                 <div class="box-con">
                     <div class="first-box-titl" id="topicsBox">
                         <h5>Topics</h5>
-                            <h2 ></h2>
+                        <h2></h2>
                     </div>
                     <div class="box-icon">
                         <img src="../static/images/icon-2.png" alt="live connection" class="img-fluid">
@@ -65,7 +73,7 @@
                 <div class="box-con">
                     <div class="first-box-titl" id="sentBox">
                         <h5>Sent</h5>
-                            <h2 ></h2>
+                        <h2></h2>
                     </div>
                     <div class="box-icon">
                         <img src="../static/images/icon-3.png" alt="live connection" class="img-fluid">
@@ -76,7 +84,7 @@
                 <div class="box-con">
                     <div class="first-box-titl" id="receivedBox">
                         <h5>Recieved</h5>
-                            <h2 ></h2>
+                        <h2></h2>
                     </div>
                     <div class="box-icon">
                         <img src="../static/images/icon-4.png" alt="live connection" class="img-fluid">
@@ -87,7 +95,7 @@
                 <div class="box-con">
                     <div class="first-box-titl" id="connectionBox">
                         <h5>Time</h5>
-                            <h4 ></h4>
+                        <h4></h4>
                     </div>
                     <div class="box-icon">
                         <img src="../static/images/icon-5.png" alt="live connection" class="img-fluid">
@@ -97,132 +105,298 @@
         </div>
         <div class="row">
             <div class="col-md-7">
-           <div class="table-con">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th >Client ID</th>
-                        <th>Connected At</th>
-                        <th>Connected</th>
-                        <th>Created At</th>
-                        <th>IP Address</th>
-                        <th>Port</th>
-                        <th>Subscribe Count</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for client in clients %}
-                        <tr>
-                            <td>{{ client.clientid }}</td>
-                            <td>{{ client.connected_at }}</td>
-                            <td>{{ client.connected }}</td>
-                            <td>{{ client.created_at }}</td>
-                            <td>{{ client.ip_address }}</td>
-                            <td>{{ client.port }}</td>
-                            <td>{{ client.subscriptions_cnt }}</td>
-                            <td>{{ client.username }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-           </div>
+                <div class="table-con">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Client ID</th>
+                                <th>Connected At</th>
+                                <th>Connected</th>
+                                <th>Created At</th>
+                                <th>IP Address</th>
+                                <th>Port</th>
+                                <th>Subscribe Count</th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for client in clients %}
+                            <tr>
+                                <td class="clin-id">{{ client.clientid }}</td>
+                                <td>{{ client.connected_at }}</td>
+                                <td>{{ client.connected }}</td>
+                                <td>{{ client.created_at }}</td>
+                                <td>{{ client.ip_address }}</td>
+                                <td>{{ client.port }}</td>
+                                <td>{{ client.subscriptions_cnt }}</td>
+                                <td>{{ client.username }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-5">
                 <div class="barchart-con">
-                    <canvas id="metricsBarChart" width="300" height="250"></canvas>
-                    <!-- <canvas id="metricsChart" width="300" height="250"></canvas>  -->
+                    <canvas id="myChart31" width="300" height="120"></canvas>
                 </div>
                 <div class="stas-con">
-                  
+                   <div class="row">
+                    <div class="col-md-6">
+                       <div class="main-chart-con">
+                        <div class="mychart">
+                            <canvas id="myChart2" ></canvas>
+                        </div>
+                       </div>
+                    </div>
+                   
+                    <div class="col-md-6 py-3">
+                       <div class="row align-items-center d-flex">
+                        <div class="col-md-2"><p class="circl channel-count"></p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Channels Count</p></div>
+                       </div>
+                       <div class="row align-items-center d-flex">
+                        <div class="col-md-2"><p class="circl retain-count"></p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Retained Count</p></div>
+                       </div>
+                       <div class="row align-items-center d-flex">
+                        <div class="col-md-2"><p class="circl session-count"></p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Sessions Count</p></div>
+                       </div>
+                       <!-- <div class="row align-items-center d-flex">
+                        <div class="col-md-2"><p class="circl"></p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Suboptions Count</p></div>
+                       </div> -->
+                       <div class="row align-items-center d-flex">
+                        <div class="col-md-2"><p class="circl subscription-count"></p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Subscriptions Count</p></div>
+                       </div>
+                       <!-- <div class="row align-items-center d-flex">
+                        <div class="col-md-2"><p class="circl"></p></div>
+                        <div class="col-md-10 text-white stats-text"><p>Subscribers Count</p></div> 
+                       </div>-->
+                    </div>
+                   </div>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <!-- ===============script================== -->
+  <script src="../static/js/main.js"></script>
     <script>
-        // Get the canvas element
-        var ctx = document.getElementById('metricsBarChart').getContext('2d');
-      
-        // Define your data for the chart
-        var data = {
-          labels: ['Metric 1', 'Metric 2', 'Metric 3', 'Metric 4', 'Metric 5'], // Example metrics
-          datasets: [{
-            label: 'Values',
-            data: [10, 20, 15, 25, 30], // Example metric values
-            backgroundColor: [
-              'rgb(75, 192, 192)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 205, 86)',
-              'rgb(54, 162, 235)',
-              'rgb(153, 102, 255)'
-            ]
-          }]
-        };
-      
-        // Create the bar chart
-        var myBarChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: {
-            // Additional chart options (if needed)
-          }
-        });
-      </script>
-      
-      
-    <script>
-      function updateMonitorData() {
-        $.ajax({
-            url: '/get_monitor_data',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                const latestData = data[data.length - 1]; 
-                // Assuming latestData.time_stamp is a UNIX timestamp
-                const timestamp = latestData.time_stamp;
-    
-                // Create a Date object from the timestamp
-                const date = new Date(timestamp);
-    
-                // Get components of the date and time
-                const year = date.getFullYear();
-                const month = date.getMonth() + 1; // Month is zero-based, so add 1
-                const day = date.getDate();
-                const hours = date.getHours();
-                const minutes = date.getMinutes();
-                const seconds = date.getSeconds();
-    
-                // Create a formatted string
-                const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
-    
-                $('#connectionBox h4:last').text(formattedDate);
-                $('#liveConnectionBox h2:last').text(latestData.live_connections);
-                $('#topicsBox h2:last').text(latestData.topics);
-                $('#sentBox h2:last').text(latestData.sent);
-                $('#receivedBox h2:last').text(latestData.received);
-                $('#subscriptionsBox h2:last').text(latestData.subscriptions);
-              
+        var ctxvin = document.getElementById('myChart31').getContext('2d');
+        var myChart31 = new Chart(ctxvin, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Connected Clients',
+                    'Message Rate',
+                    'Bytes Transmitted',
+                    'Connection Duration',
+                    'Topics Subscribed',
+                    'QoS 1',
+                    'QoS 2',
+                    'Qos 3',
+                    'Errors',
+                    'Session Information',
+                    'Geolocation',
+                    'Client ID'
+                ],
+
+                datasets: [{
+                    label: 'hied',
+                    datalabels: {
+                        labels: {
+                            value: {
+                                color: 'green'
+                            }
+                        }
+                    },
+                    data: [{{ metrics_data['client.connected'] }},
+                    {{ metrics_data['messages.publish'] }},
+                    {{ metrics_data['bytes.sent'] }},
+                    {{ metrics_data['session.takenover'] }},
+                    {{ metrics_data['packets.subscribe.received'] }},
+                    {{ metrics_data['packets.subscribe.auth_error'] }},
+                    {{ metrics_data['packets.subscribe.error'] }},
+                    {{ metrics_data['packets.subscribe.auth_error'] }},
+                    {{ metrics_data['packets.connack.auth_error'] }},
+                    {{ metrics_data['session.discarded'] }},
+                    {{ metrics_data['olp.hbn'] }},
+                    {{ metrics_data['client.authenticate'] }}
+                      
+                    ],
+
+
+
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235,0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235,0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235,0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235,0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        
+
+                    ],
+
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        
+
+                    ],
+                    borderWidth: 1
+                }]
             },
-            error: function (error) {
-                console.error('Error fetching live data:', error);
+
+            options: {
+                legend: {
+                    display: false //This will do the task
+                },
+                scales: {
+                    xAxes: [{
+                        barPercentage: 0.2,
+                        ticks: {
+                            color: 'white',
+                            fontSize: 10,
+
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false,
+                        }
+                       
+                }],
+                
+                    yAxes: [{
+                    ticks: {
+                        fontSize: 10,
+                        color: 'white',
+
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                }]
             }
-        });
-    }
-    
-    setInterval(updateMonitorData, 1000);
-    
-    updateMonitorData();
-    
+        }
+});
+
+
     </script>
-    
-  
-  
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-  
-    
+
+<script>
+      // break
+      var xValues = [];
+            var yValues = [
+            {{ stats['channels.count'] }},
+            {{ stats['retained.count'] }},
+            {{ stats['sessions.count'] }},
+            {{ stats['subscriptions.count'] }},
+            
+        ];
+            var barColors = [
+                "#22C55E",
+                "#F7B31C",
+                "#EF4444",
+                "#87CEEB",
+            ];
+            new Chart("myChart2", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues,
+                        borderColor: 'transparent'
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 80,
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+            });
+</script>
+
+    <script>
+        
+function updateMonitorData() {
+  $.ajax({
+      url: '/get_monitor_data',
+      method: 'GET',
+      dataType: 'json',
+      success: function (data) {
+          const latestData = data[data.length - 1]; 
+          // Assuming latestData.time_stamp is a UNIX timestamp
+          const timestamp = latestData.time_stamp;
+
+          // Create a Date object from the timestamp
+          const date = new Date(timestamp);
+
+          // Get components of the date and time
+          const year = date.getFullYear();
+          const month = date.getMonth() + 1; // Month is zero-based, so add 1
+          const day = date.getDate();
+          const hours = date.getHours();
+          const minutes = date.getMinutes();
+          const seconds = date.getSeconds();
+
+          // Create a formatted string
+          const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+          $('#connectionBox h4:last').text(formattedDate);
+          $('#liveConnectionBox h2:last').text(latestData.live_connections);
+          $('#topicsBox h2:last').text(latestData.topics);
+          $('#sentBox h2:last').text(latestData.sent);
+          $('#receivedBox h2:last').text(latestData.received);
+      
+      },
+      error: function (error) {
+          console.error('Error fetching live data:', error);
+      }
+  });
+}
+
+setInterval(updateMonitorData, 1000);
+
+updateMonitorData();
+
+
+    </script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.4.0/justgage.min.js"></script>
+
+
+
+
 </body>
 
 </html>
