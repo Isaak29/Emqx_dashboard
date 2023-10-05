@@ -57,21 +57,21 @@ def get_alarm_data():
         for item in alarms_data:
             item['activate_at'] = format_timestamp(item.get('activate_at')) if item.get('activate_at') is not None else None
             item['deactivate_at'] = format_timestamp(item.get('deactivate_at')) if item.get('deactivate_at') is not None else None
-        # alarmdata=[
-        #                 {
-        #                 "node": "emqx@127.0.0.1",
-        #                 "name": "high_system_memory_usage",
-        #                 "message": "System memory usage is higher than 70%",
-        #                 "details": {
-        #                     "high_watermark": 70
-        #                 },
-        #                 "duration": 297056,
-        #                 "activate_at": "2021-10-25T11:52:52.548+08:00",
-        #                 "deactivate_at": "2021-10-31T10:52:52.548+08:00"
-        #                 }
-        #             ]
+        alarmdata=[
+                        {
+                        "node": "emqx@127.0.0.1",
+                        "name": "high_system_memory_usage",
+                        "message": "System memory usage is higher than 70%",
+                        "details": {
+                            "high_watermark": 70
+                        },
+                        "duration": 297056,
+                        "activate_at": "2021-10-25T11:52:52.548+08:00",
+                        "deactivate_at": "2021-10-31T10:52:52.548+08:00"
+                        }
+                    ]
         
-        return jsonify(alarms_data)
+        return jsonify(alarmdata)
     else:
         return "Unsupported method", 405
 
