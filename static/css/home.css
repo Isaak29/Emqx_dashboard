@@ -91,7 +91,7 @@ body{
     text-align: center;
 }
 .box-icon{
-    width: 30px;
+    width: 50px;
 }
 .table-con{
     background-color:#1C1F36;
@@ -193,3 +193,25 @@ font-size: 16px;
 .subscription-count{
     background-color: #87CEEB;
 }
+.modal-content{
+    background-color: #cccc;
+    border-radius: 10px;
+    color: #282828;
+}
+.modal-body table tr{
+    color: #282828;
+}
+#closeModalButton img{
+    width: 20px;
+    background: none;
+    outline: none;
+    border: none;
+
+}
+.modal-header button{
+    background: none;
+    outline: none;
+    border: none;
+
+}
+
